@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,11 +35,18 @@ namespace Rabbit.Framework.Web.Server
             {
                 await frameworkBus.StartAsync();
 
-                await RabbitMqBusFactory.SendToCoreQueue(new StringIntRequestModel
+                await RabbitQueuePublisher.SendToCoreQueue(new StringIntRequestModel
                 {
                     IntValue = 17,
                     StringValue = "CoreCall"
                 });
+
+                var response = await RabbitRpcPublisher.SendToCoreRpcQueue(new StringIntRequestModel
+                {
+                    IntValue = 13, StringValue = "FromFrameworkRpcCall"
+                });
+
+                Console.WriteLine($"int: {response.IntValue}, string: {response.StringValue}, time: {response.DateTime}");
             });
         }
     }

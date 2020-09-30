@@ -35,7 +35,7 @@ namespace Rabbit.Core.ConsoleApp.Client
 
         private static async Task SendRequest()
         {
-            var result = await RabbitMqBusFactory.SendToCoreRpcQueue(new StringIntRequestModel
+            var result = await RabbitRpcPublisher.SendToCoreRpcQueue(new StringIntRequestModel
             {
                 IntValue = _intValue++,
                 StringValue = "FrameworkRpcCall"

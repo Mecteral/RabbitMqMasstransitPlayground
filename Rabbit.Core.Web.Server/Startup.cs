@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -43,10 +44,18 @@ namespace Rabbit.Core.Web.Server
                 await coreBus.StartAsync();
                 await coreRpcBus.StartAsync();
 
-                await RabbitMqBusFactory.SendToFrameworkQueue(new StringIntRequestModel
+                await RabbitQueuePublisher.SendToFrameworkQueue(new StringIntRequestModel
                 {
                     IntValue = 13, StringValue = "FrameworkCall"
                 });
+
+                var response = await RabbitRpcPublisher.SendToFrameworkRpcQueue(new StringIntRequestModel
+                {
+                    IntValue = 13,
+                    StringValue = "FromFrameworkRpcCall"
+                });
+
+                Console.WriteLine($"int: {response.IntValue}, string: {response.StringValue}, time: {response.DateTime}");
             });
         }
     }
