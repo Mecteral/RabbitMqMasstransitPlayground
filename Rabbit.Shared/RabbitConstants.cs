@@ -8,5 +8,7 @@
         public const string CoreRpcQueue = "CoreRpcQueueEndpoint";
 
         public const string RabbitHost = "localhost";
+        public const string RabbitUserName = "guest";
+        public const string RabbitPassword = "guest";
     }
 }

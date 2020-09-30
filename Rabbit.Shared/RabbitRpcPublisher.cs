@@ -17,10 +17,7 @@ namespace Rabbit.Shared
         {
             try
             {
-                var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
-                {
-                    cfg.Host(RabbitConstants.RabbitHost);
-                });
+                var bus = Bus.Factory.CreateUsingRabbitMq(RabbitMqBusFactory.ConfigureRabbitHost);
 
                 await bus.StartAsync();
 

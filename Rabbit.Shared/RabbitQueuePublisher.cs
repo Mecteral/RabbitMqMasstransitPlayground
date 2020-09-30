@@ -19,10 +19,7 @@ namespace Rabbit.Shared
 
         private static async Task SendToEndpoint(object obj, string queueName)
         {
-            var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
-            {
-                cfg.Host(RabbitConstants.RabbitHost);
-            });
+            var bus = Bus.Factory.CreateUsingRabbitMq(RabbitMqBusFactory.ConfigureRabbitHost);
 
             await bus.StartAsync();
 

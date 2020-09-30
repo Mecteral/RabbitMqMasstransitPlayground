@@ -1,4 +1,5 @@
 ﻿using MassTransit;
+using MassTransit.RabbitMqTransport;
 using Rabbit.Shared.Consumer;
 
 namespace Rabbit.Shared
@@ -9,7 +10,7 @@ namespace Rabbit.Shared
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                cfg.Host(RabbitConstants.RabbitHost);
+                ConfigureRabbitHost(cfg);
 
                 cfg.ReceiveEndpoint(RabbitConstants.FrameWorkQueue, e =>
                 {
@@ -27,7 +28,7 @@ namespace Rabbit.Shared
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                cfg.Host(RabbitConstants.RabbitHost);
+                ConfigureRabbitHost(cfg);
 
                 cfg.ReceiveEndpoint(RabbitConstants.CoreWorkQueue, e =>
                 {
@@ -36,11 +37,20 @@ namespace Rabbit.Shared
             });
         }
 
+        public static void ConfigureRabbitHost(IRabbitMqBusFactoryConfigurator cfg)
+        {
+            cfg.Host(RabbitConstants.RabbitHost, h =>
+            {
+                h.Username(RabbitConstants.RabbitUserName);
+                h.Password(RabbitConstants.RabbitPassword);
+            });
+        }
+
         public static IBusControl CreateCoreRpcEndpoint()
         {
             return Bus.Factory.CreateUsingRabbitMq(cfg =>
             {
-                cfg.Host(RabbitConstants.RabbitHost);
+                ConfigureRabbitHost(cfg);
 
                 cfg.ReceiveEndpoint(RabbitConstants.CoreRpcQueue, e =>
                 {
