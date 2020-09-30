@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Rabbit.Shared;
+using Rabbit.Shared.Models;
 
 namespace Rabbit.Core.Web.Server
 {

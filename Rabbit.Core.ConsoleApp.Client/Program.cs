@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Rabbit.Shared;
+using Rabbit.Shared.Models;
 
 namespace Rabbit.Core.ConsoleApp.Client
 {

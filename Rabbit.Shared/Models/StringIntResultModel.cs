@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Rabbit.Shared
+namespace Rabbit.Shared.Models
 {
     public class StringIntResultModel
     {

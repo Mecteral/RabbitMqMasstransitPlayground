@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MassTransit;
+using Rabbit.Shared.Models;
 
 namespace Rabbit.Shared
 {
@@ -18,13 +19,13 @@ namespace Rabbit.Shared
             {
                 var bus = Bus.Factory.CreateUsingRabbitMq(cfg =>
                 {
-                    cfg.Host("localhost");
+                    cfg.Host(RabbitConstants.RabbitHost);
                 });
 
                 await bus.StartAsync();
 
                 var client =
-                    bus.CreateRequestClient<StringIntRequestModel>(new Uri($"rabbitmq://localhost/{queueName}"));
+                    bus.CreateRequestClient<StringIntRequestModel>(new Uri($"rabbitmq://{RabbitConstants.RabbitHost}/{queueName}"));
 
                 var response = await client.GetResponse<StringIntResultModel>(stringIntRequestModel);
 

@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using MassTransit;
+using Rabbit.Shared.Models;
 
-namespace Rabbit.Shared
+namespace Rabbit.Shared.Consumer
 {
     public class CoreStringIntConsumer : IConsumer<StringIntRequestModel>
     {

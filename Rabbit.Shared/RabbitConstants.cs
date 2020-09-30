@@ -6,5 +6,7 @@
         public const string CoreWorkQueue = "CoreQueueEndpoint";
         public const string FrameWorkRpcQueue = "FrameworkRpcQueueEndpoint";
         public const string CoreRpcQueue = "CoreRpcQueueEndpoint";
+
+        public const string RabbitHost = "localhost";
     }
 }
